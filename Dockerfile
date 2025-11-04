@@ -12,7 +12,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 
-# Ensure the entrypoint script exists and is executable
+# Ensure the entrypoint script exists and is executable (N/A)
 
 
 # Set the entrypoint to the entrypoint script
