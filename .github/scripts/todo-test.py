@@ -25,3 +25,56 @@ class TestTaskPool(unittest.TestCase):
     done_tasks = self.pool.get_done_tasks()
     self.assertEqual(len(done_tasks), 3)
     self.assertTrue(all(task.status == "Done" for task in done_tasks))
+
+
+
+
+if __name__ == "__main__":
+  suite = unittest.TestLoader().loadTestsFromTestCase(TestTaskPool)
+
+  captured_output = StringIO()
+
+  # Run tests with verbosity 2
+  result = unittest.TextTestRunner(stream=captured_output, verbosity=2).run(suite)
+
+  # Capture the relevant output
+  output_lines = captured_output.getValue().splitLines()
+
+  for line in output_lines:
+    if "ok" in line:
+      print(line.split(' ')[0] + '... ok')
+
+
+total_tests = result.testRun
+failed_tests = [t[0] for t in result.failures + result.errors]
+passed_tests = [test for test in suite if test  not in failed_tests]
+
+print(f"Total Tests: {total_tests}")
+print(f"Passed: {len(passed_tests)} ({(len(passed_tests) / total_tests) * 100:.2f}%)")
+print(f"Failed: {len(failed_tests)} ({(len(failed_tests) / total_tests) * 100:.2f}%)")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
